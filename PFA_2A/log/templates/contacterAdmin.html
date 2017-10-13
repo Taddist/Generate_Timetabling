@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Contacter Admin {% endblock %}
+{% block content %}
+
+<center>
+
+<br><br>
+           <form method="POST" class="post-form">{% csrf_token %}
+                        {{ form.as_p }}
+                       <button type="submit" class="save btn btn-success">Envoyer</button>
+           </form>          
+</center>
+
+
+<script type="text/javascript">
+   var envoi="{{envoi}}";
+  
+   if( envoi){
+        alertify.success('Votre message a bien été téléchargé !');    
+    }
+    
+</script>
+
+{% endblock %}
+
+
+
+

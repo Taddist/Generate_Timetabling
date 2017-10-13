@@ -1,0 +1,110 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>{% block title %}{% endblock %}</title>
+                <!-- Core CSS - Include with every page -->
+               
+                <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+           
+
+
+                <link href="{% static 'css/alertify.default.css' %}" rel="stylesheet">
+                <link href="{% static 'css/alertify.bootstrap.css' %}" rel="stylesheet">
+                <link href="{% static 'css/alertify.css' %}" rel="stylesheet">
+                <link href="{% static 'css/alertify.core.css' %}" rel="stylesheet">
+                
+                 <script src = "{% static 'js/alertify.js' %}"></script>
+                </head>
+                <body>
+                    <nav class="navbar navbar-default">
+                        <div class="container-fluid">
+                            <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="/index">Project PFA</a>
+                <!-- <img   src="{% static "img/logo.png" %}" alt="Logo" width="60" height="60" /> -->
+                            </div>
+                            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav navbar-right">
+                                  
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Notifications <span class="badge">{{SumNotif}}</span></a>
+                                            
+                                        <ul class="dropdown-menu" role="menu" >
+                                            {% if notif %}
+                                                 {% for n in notif %}
+                                                    <li>   
+                                                <a href="/notification">{{n.message}}</a>
+                                            </li>
+                                                 {% endfor %}
+
+                                             {% endif %}
+                                             <li class="divider"></li>
+                                            <li>
+                                                <a href="/notification">Voir Tout </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+
+
+
+
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Account's {{user.last_name}} {{firstname}}
+                                           
+                                        <ul class="dropdown-menu" role="menu" >
+                                            <li>   
+                                                <a href="/contacterAdmin">Contacter Admin</a>
+                                            </li>
+                                            <li class="divider"></li>
+                                            <li>
+                                                <a href="/logout">Déconnexion </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                                <ul class="test">
+                                <form  method="POST" action="/consulterEmploi" class="navbar-form navbar-right" enctype="multipart/form-data">
+                                    {% csrf_token %}  
+                                         <input type="text" id="semaine" name="semaine" class="form-control" placeholder="Recherche.... Ex:S1">
+                                </form>
+
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+                            <div class="container">
+                                <div class="masthead">
+                                    <h3 class="text-muted"></h3>
+                                        <nav>
+                                            <ul class="nav nav-justified">
+                                                <li class="active"><a href="/">Acceuil</a></li>
+                                                <li><a href="/creerEmploi">Creer son emploi du temps   </a></li>
+                                                <li><a href="/generation">Générer emploi du temps  </a></li>
+                                                <li><a href="/declarerExam">Declarer Exam  </a></li>
+                                                <li><a href="/rattrapage">Visualiser rattrapages  </a></li>  
+                                            </ul>
+                                        </nav>
+                                </div>
+     <br><br>
+                {% block content %}
+                {% endblock %}
+                
+                    <script src = "{% static 'js/jquery.min.js' %}"></script>
+                    <script src = "{% static 'js/bootstrap.min.js' %}"></script>
+                    <script src = "{% static 'js/homejava.js' %}"></script>
+
+        {% block javascript %}
+        {% endblock %}
+
+
+            </body>
+        </html>

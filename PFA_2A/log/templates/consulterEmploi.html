@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Declarer Exam{% endblock %}
+{% block content %}
+
+
+
+
+ 
+<br/><br/>
+<center><h4> Semaine {{ ft.semaine }} </h4> </center>
+<br/><br/>
+
+
+ {% if freetime %}
+        <div class="row">
+        <div class="col-md-6">
+           <table class="table table-striped">
+            <thead>
+              <tr>
+               
+                <th>Jour </th>
+                <th>Créneau</th>
+                <th>Supprimer</th>
+              </tr>
+            </thead>
+            <tbody>
+        {% for ft in freetime %}
+             <tr>
+                
+                <td>{{ ft.timeslote.jour }}</td>
+                <td>{{ ft.timeslote.horaire }}</td>
+                <td>
+                    <button type="button" onclick="Delete({{ft.id}});" class="btn btn-default btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+            </button>
+        </td>
+              </tr>
+             
+        {% endfor %}
+
+            </tbody>
+          </table>
+        </div>
+
+
+    {% endif %}
+{% if l %}
+    <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th>Jour/Horaire</th>
+                  <th>8h-10h</th>
+                  <th>10h-12h</th>
+                  <th>14h-16h</th>
+                  <th>16h-18h</th>
+                </tr>
+              </thead>
+               
+              <tbody>
+                <tr>
+               
+                  <td>Lundi</td>
+                  {% if l.0 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.1 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                 {% if l.2 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.3 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                  
+                </tr>
+                <tr>
+                  <td>Mardi</td>
+                   {% if l.4 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.5 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                 {% if l.6 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.7 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                </tr>
+                <tr>
+                  <td>Mercredi</td>
+                   {% if l.8 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.9 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                  <td></td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Jeudi</td>
+                 {% if l.12 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.13 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                 {% if l.14 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.15 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                </tr>
+                <tr>
+                  <td>Vendredi</td>
+                  {% if l.16 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.17 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                 {% if l.18 != -1 %}
+                    <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+
+                  {% if l.19 != -1 %}
+                  <td class="success" ></td>
+                  {% else %}
+                    <td> </td>
+                  {% endif %}
+                </tr>
+              </tbody>
+            </table>
+           
+          </div>
+
+     {% else %}
+     <script type="text/javascript">
+  
+         alertify.error('No Data .Please make a research !');
+   
+</script>   {% endif %}
+
+<script type="text/javascript">
+  function Delete(a){
+               var retVal = confirm("Voulez vous supprimer ce enregistrement ?");
+               if( retVal == true ){
+                  window.location="/emploiCreneau/supprimer/"+a+"/";
+                  return true;
+               }
+               else{
+                  return false;
+               }
+            }
+</script>
+
+<script type="text/javascript">
+  var erreurSemaine="{{erreurSemaine}}"
+  if(erreurSemaine){
+      alertify.error('Cette semaine n\'existe pas.Essayer une autre ');
+    }
+</script>
+
+ 
+{% endblock %}
